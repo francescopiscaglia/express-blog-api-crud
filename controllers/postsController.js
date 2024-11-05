@@ -73,10 +73,22 @@ const store = (req, res) => {
     });
 };
 
+// update (bonus)
+const update = (req, res) => {
+    res.send("Data Recieved Successfully!");
+
+    const userTitle = req.body.title;
+    const userContent = req.body.content;
+    const userImage = req.body.image;
+    const userSlug = req.body.slug;
+    const userTags = req.body.tags;
+};
+
 
 module.exports = {
     api,
     index,
     show,
-    store
+    store,
+    update
 };
