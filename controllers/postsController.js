@@ -3,7 +3,9 @@ const posts = require("../db/db.js");
 
 // path middleware
 const path = require("path");
-const { post } = require("../routes/posts.js");
+
+// fs middleware
+const fs = require("fs");
 
 // API
 const api = (req, res) => {
@@ -50,6 +52,10 @@ const store = (req, res) => {
     };
 
     posts.push(newObj);
+
+    // update db
+    fs.writeFileSync("./db/db.js", `module.exports = ${JSON.stringify(posts, null, 4)}`);
+    
 
     res.json({
         status: 201,
