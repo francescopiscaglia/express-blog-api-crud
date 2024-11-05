@@ -16,8 +16,18 @@ const api = (req, res) => {
 };
 
 // index
+/*
 const index = (req, res) => {
     res.sendFile(path.resolve(__dirname, "../public/html/main.html"))
+};
+*/
+
+// index (bonus)
+const index = (req, res) => {
+    res.json({
+        data: posts,
+        counter: posts.length
+    });
 };
 
 // show
@@ -56,7 +66,6 @@ const store = (req, res) => {
     // update db
     fs.writeFileSync("./db/db.js", `module.exports = ${JSON.stringify(posts, null, 4)}`);
     
-
     res.json({
         status: 201,
         data: posts,
