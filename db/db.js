@@ -45,16 +45,6 @@ module.exports = [
         ]
     },
     {
-        "title": "Cheesecake",
-        "slug": "cheesecake",
-        "content": "Il miglior dolce",
-        "image": "/imgs/posts/cheesecake.jpeg",
-        "tags": [
-            "Dolci",
-            "Torte"
-        ]
-    },
-    {
         "title": "Tiramisù",
         "slug": "tiramisù",
         "content": "Il miglior dolce",
