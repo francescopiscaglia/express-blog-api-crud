@@ -18,7 +18,7 @@ router.get("/:slug", PostsController.show)
 router.post("/", PostsController.store)
 
 // update
-router.put("/", PostsController.update)
+router.put("/:slug", PostsController.update)
 
 
 

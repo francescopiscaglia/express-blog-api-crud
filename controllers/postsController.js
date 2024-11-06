@@ -73,16 +73,45 @@ const store = (req, res) => {
     });
 };
 
-// update (bonus)
+// update
 const update = (req, res) => {
-    res.send("Data Recieved Successfully!");
 
-    const userTitle = req.body.title;
-    const userContent = req.body.content;
-    const userImage = req.body.image;
-    const userSlug = req.body.slug;
-    const userTags = req.body.tags;
+    // find the post by slug
+    const post = posts.find(post => post.slug.toLowerCase() === req.params.slug.toLowerCase());
+
+    // check if post exists
+    if (!post) {
+        return res.status(404).json({
+            error: `404! Not found post with this slug: ${req.params.slug}`
+        });
+    }
+
+    // update the post
+    post.title = req.body.title;
+    post.slug = req.body.slug;
+    post.content = req.body.content;
+    post.tags = req.body.tags;
+    post.image = req.body.image;
+
+    // update the db
+    fs.writeFileSync("./db/db.js", `module.exports = ${JSON.stringify(posts, null, 4)}`);
+
+    // return the new post 
+    res.json({
+        status: 201,
+        data: post
+    });
+    
 };
+
+/*
+
+/:id [PUT] - rotta update del crud che riceverà dei dati e modificherá un post esistente. Questa dovrà riceve i dati in formato json e dovrà restituire il json dell’elemento appena creato.
+
+/:id [DELETE] - rotta destroy del crud che dovrà restituire un 404 nel caso non sia stato trovato un post corrispondente.
+Restituire come responso la nuova array escluso il post eliminato
+
+*/
 
 
 module.exports = {
