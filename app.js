@@ -7,6 +7,9 @@ const PostsRouter = require("./routes/posts.js");
 // import error 404 middleware
 const notFoundMiddleware = require("./middlewares/notFound.js");
 
+// import server error middleware
+const serverError = require("./middlewares/serverError.js");
+
 
 // json middleware
 app.use(express.json());
@@ -34,11 +37,4 @@ app.listen(3001, () => {
 app.use(notFoundMiddleware);
 
 // 500 error middleware
-app.use((err, req, res, next) => {
-    console.log("Error:", err.message);
-    console.error(err.stack);
-    res.status(500).send({
-        message: "Somethink went wrong",
-        error: err.message
-    });  
-});
+app.use(serverError);
