@@ -46,7 +46,7 @@ const show = (req, res) => {
     // risposta trovata
     res.json({
         data: findPostWithSlug
-    });  
+    });
 };
 
 // store
@@ -54,6 +54,7 @@ const store = (req, res) => {
 
     // creazione del nuovo dolce
     const newObj = {
+        id: posts.length + 1,
         title: req.body.title,
         slug: req.body.slug,
         content: req.body.content,
@@ -65,7 +66,7 @@ const store = (req, res) => {
 
     // update db
     fs.writeFileSync("./db/db.js", `module.exports = ${JSON.stringify(posts, null, 4)}`);
-    
+
     res.json({
         status: 201,
         data: posts,
@@ -101,7 +102,7 @@ const update = (req, res) => {
         status: 201,
         data: post
     });
-    
+
 };
 
 // destroy
