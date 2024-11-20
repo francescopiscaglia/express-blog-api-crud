@@ -1,5 +1,8 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
+
+app.use(cors());
 
 // importazione router
 const PostsRouter = require("./routes/posts.js");
@@ -15,9 +18,9 @@ const serverError = require("./middlewares/serverError.js");
 app.use(express.json());
 
 // middlware to trigger a 500 error
-app.use("/posts", (req, res, next) => {
-    throw new Error("You broke everythink dude!");
-});
+// app.use("/posts", (req, res, next) => {
+//     throw new Error("You broke everythink dude!");
+// });
 
 // router middleware
 app.use("/posts", PostsRouter);
