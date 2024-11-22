@@ -108,18 +108,21 @@ const update = (req, res) => {
 // destroy
 const destroy = (req, res) => {
 
+    // Take the title from the req.params (url) and transfrom it in slug
+    const deleteTitle = req.params.title?.toLowerCase().replaceAll(" ", "-");
+
     // find the post by slug
-    const post = posts.find(post => post.slug.toLowerCase() === req.params.slug.toLowerCase());
+    const post = posts.find(post => post.title.toLowerCase().replace(/ /g, "-") === deleteTitle);
 
     // check if post exists
     if (!post) {
         return res.status(404).json({
-            error: `404! Not found post with this slug: ${req.params.slug}`
+            error: `404! Not found post with this slug: ${req.params.title}`
         });
     };
 
     // delete from array
-    const newPosts = posts.filter(post => post.slug.toLowerCase() !== req.params.slug.toLowerCase());
+    const newPosts = posts.filter(post => post.title.toLowerCase().replace(/ /g, "-") !== deleteTitle);
 
     // update the db
     fs.writeFileSync("./db/db.js", `module.exports = ${JSON.stringify(newPosts, null, 4)}`);
